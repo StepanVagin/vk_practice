@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Улучшение изображений в браузере</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Улучшение изображений в реальном времени</h1>
+    <p class="subtitle">Обработка запускается прямо в браузере, без отправки изображения на сервер</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.heic,.heif" hidden />
+        <span id="dropzoneText">Выберите файл (JPG, PNG, BMP, HEIC) или перетащите сюда</span>
+      </label>
+
+      <div class="controls">
+        <label class="checkbox">
+          <input type="checkbox" id="autoMode" checked />
+          Автоматический подбор параметров
+        </label>
+
+        <div class="sliders" id="manualSliders">
+          <label>Яркость
+            <input type="range" id="brightness" min="-1" max="1" step="0.05" value="0" />
+          </label>
+          <label>Контрастность
+            <input type="range" id="contrast" min="-1" max="1" step="0.05" value="0" />
+          </label>
+          <label>Цветность
+            <input type="range" id="saturation" min="-1" max="1" step="0.05" value="0" />
+          </label>
+        </div>
+
+        <div class="buttons">
+          <button id="processBtn" disabled>Обработать</button>
+          <button id="cancelBtn" disabled class="secondary">Отменить</button>
+          <button id="downloadBtn" disabled class="secondary">Скачать результат</button>
+        </div>
+      </div>
+
+      <div class="progress-wrap" id="progressWrap" hidden>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <span id="progressText">—</span>
+      </div>
+    </section>
+
+    <section class="preview">
+      <div class="preview-box">
+        <h3>Исходное изображение</h3>
+        <img id="originalPreview" alt="Оригинал" />
+      </div>
+      <div class="preview-box">
+        <h3>Результат</h3>
+        <img id="resultPreview" alt="Результат" />
+      </div>
+    </section>
+
+    <p class="log" id="log"></p>
+  </main>
+
+  <!-- heic2any подключается обычным (не модульным) скриптом, чтобы создать
+       глобальную функцию window.heic2any, которую использует format-utils.js -->
+  <script src="vendor/heic2any.min.js"></script>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
